@@ -1,17 +1,25 @@
-import React from 'react';
-import { render } from 'react-dom';
-import Root from './containers/Root';
-import configureStore from './store/configureStore';
-import { browserHistory } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import promise from "redux-promise";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './assets/css/styles.css';
 
-import './assets/css/index.scss';
+import App from "./components/app.js";
 
+const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
-const store = configureStore();
-const history = syncHistoryWithStore(browserHistory, store);
-
-render(
-  <Root store={store} history={history} />,
-  document.getElementById('root')
+ReactDOM.render(
+   /* <Provider store={createStoreWithMiddleware(reducers)}> */
+    <BrowserRouter>
+      <div>
+        <Switch>
+          <Route path="/" component={App} />
+        </Switch>
+      </div>
+    </BrowserRouter>,
+  /* </Provider> , */
+  document.querySelector("#root")
 );

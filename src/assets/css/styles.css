@@ -1,0 +1,12 @@
+#schdlr {
+    color: #2b7cff;
+}
+
+.leftText {
+    padding: 10%;
+}
+
+.fullScreen {
+    height: 100vh;
+    background-color: #eff5ff;
+}
