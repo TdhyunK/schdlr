@@ -6,20 +6,20 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import promise from "redux-promise";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './assets/css/styles.css';
-
+import reducers from "./reducers";
 import App from "./components/app.js";
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
 ReactDOM.render(
-   /* <Provider store={createStoreWithMiddleware(reducers)}> */
+  <Provider store={createStoreWithMiddleware(reducers)}>
     <BrowserRouter>
       <div>
         <Switch>
           <Route path="/" component={App} />
         </Switch>
       </div>
-    </BrowserRouter>,
-  /* </Provider> , */
+    </BrowserRouter>
+  </Provider> ,
   document.querySelector("#root")
 );
