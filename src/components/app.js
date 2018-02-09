@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 //import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { numForms } from "../actions/index.js"; 
+import { createForms } from "../actions/index.js"; 
 
 class App extends Component {
 
@@ -11,36 +11,45 @@ class App extends Component {
         return(
             <div className="form-group">
                 <label> {field.label} </label>
-                <input className="form-control" type="text" {...field.input}/>
+                <div className="row">
+                    <input id="numForms" className="form-control" type="text" {...field.input}/>
+                    <button type="submit" className="btn btn-primary"> Next Step </button>
+                </div>
                 <div className="text-help">
                 </div>
             </div>
         );
     }
 
-    handleChange = (e) => {
-        console.log("handlle change");
-    
+    onSubmit = (values) => {
+        this.props.createForms(values.numForms);
     }
     
 
     render() {
+        const { handleSubmit } = this.props;
 
         return (
             <div className="fullScreen"> 
                 <div className="leftText">
                         <h1 id="schdlr" > SCHDLR </h1>
-
                         <h4> Let us help you pick your next class schedule </h4>
-                        <Field 
-                            label="Do you need help picking 1, 2, or 3 additional classes?"
-                            name="numForms"
-                            component={this.renderField}
-                        />
+                        <form onSubmit={handleSubmit(this.onSubmit)} >
+                            <Field 
+                                label="Do you need help picking 1, 2, or 3 additional classes?"
+                                name="numForms"
+                                component={this.renderField}
+                            />
+                        </form>
                 </div>
             </div>
         );
       }
+}
+
+
+function mapStateToProps(state){
+
 }
 
 function validate(values){
@@ -58,4 +67,4 @@ function validate(values){
 export default reduxForm({
     validate,
     form: 'numForms'
-})(connect(null, { numForms })(App)); 
+})(connect(null, { createForms })(App)); 
