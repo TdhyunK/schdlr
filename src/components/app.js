@@ -2,29 +2,33 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 //import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { createForms } from "../actions/index.js"; 
+import { submitNumForms } from "../actions/index.js"; 
 
 class App extends Component {
 
     renderField(field){
-        console.log(field.meta.touched);
+        const { meta: { touched, error } } = field;
+        console.log("error: " + error);
+        console.log("touched: " + touched);
+        const className = `form-group ${touched && error ? "has-danger" : "" }`;
+        console.log("classname: " + className);
         return(
-            <div className="form-group">
+            <div className={className}>
                 <label> {field.label} </label>
                 <div className="row">
                     <input id="numForms" className="form-control" type="text" {...field.input}/>
                     <button type="submit" className="btn btn-primary"> Next Step </button>
                 </div>
                 <div className="text-help">
+                    { touched ? error : "" }
                 </div>
             </div>
         );
     }
 
     onSubmit = (values) => {
-        this.props.createForms(values.numForms);
+        this.props.submitNumForms(values.numForms);
     }
-    
 
     render() {
         const { handleSubmit } = this.props;
@@ -49,6 +53,7 @@ class App extends Component {
 
 
 function mapStateToProps(state){
+    return { numForms: state.numForms }; 
 
 }
 
@@ -58,7 +63,7 @@ function validate(values){
 
     if (values.numForms > 3 || values.numForms <= 0) {
         console.log("Enter a valid number please");
-        errors.title = "Please enter a number between 0 and 3.";
+        errors.numForms = "Please enter a number between 0 and 3.";
     }
 
     return errors;
@@ -67,4 +72,4 @@ function validate(values){
 export default reduxForm({
     validate,
     form: 'numForms'
-})(connect(null, { createForms })(App)); 
+})(connect(mapStateToProps, { submitNumForms })(App)); 
