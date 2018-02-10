@@ -7,7 +7,8 @@ import promise from "redux-promise";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './assets/css/styles.css';
 import reducers from "./reducers";
-import App from "./components/app.js";
+import App from "./components/app";
+import classForm from "./components/classForm";
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
@@ -16,7 +17,8 @@ ReactDOM.render(
     <BrowserRouter>
       <div>
         <Switch>
-          <Route path="/" component={App} />
+          <Route path="/" component={classForm} />
+          <Route path="/createForm" component={classForm} />
         </Switch>
       </div>
     </BrowserRouter>

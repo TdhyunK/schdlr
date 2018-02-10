@@ -1,17 +1,14 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
-//import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { submitNumForms } from "../actions/index.js"; 
+import { submitNumForms } from "../actions/index"; 
+import classForm from "./classForm";
 
 class App extends Component {
 
     renderField(field){
         const { meta: { touched, error } } = field;
-        console.log("error: " + error);
-        console.log("touched: " + touched);
         const className = `form-group ${touched && error ? "has-danger" : "" }`;
-        console.log("classname: " + className);
         return(
             <div className={className}>
                 <label> {field.label} </label>
@@ -46,6 +43,7 @@ class App extends Component {
                             />
                         </form>
                 </div>
+                <classForm />
             </div>
         );
       }
