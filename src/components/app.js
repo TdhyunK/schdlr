@@ -11,7 +11,7 @@ class App extends Component {
         const className = `form-group ${touched && error ? "has-danger" : "" }`;
         return(
             <div className={className}>
-                <label> {field.label} </label>
+                <h6> {field.label} </h6>
                 <div className="row">
                     <input id="numForms" className="form-control" type="text" {...field.input}/>
                     <button type="submit" className="btn btn-primary"> Next Step </button>
@@ -31,22 +31,27 @@ class App extends Component {
         const { handleSubmit } = this.props;
 
         return (
-            <div>
-            <div className="fullScreen"> 
-                <div className="leftText">
-                        <h1 id="schdlr" > SCHDLR </h1>
-                        <h4> Let us help you pick your next class schedule </h4>
-                        <form onSubmit={handleSubmit(this.onSubmit)} >
-                            <Field 
-                                label="Do you need help picking 1, 2, or 3 additional classes?"
-                                name="numForms"
-                                component={this.renderField}
-                            />
-                        </form>
+            <div className="container-fluid">
+                <div className="row">
+                    <div className="col-lg-6">
+                        <div className="fullScreen"> 
+                            <div className="leftText">
+                                <h1 id="schdlr" > SCHDLR </h1>
+                                <h4> Let us help you pick your next class schedule </h4>
+                                <form onSubmit={handleSubmit(this.onSubmit)} >
+                                    <Field 
+                                        label="Do you need help picking 1, 2, or 3 additional classes?"
+                                        name="numForms"
+                                        component={this.renderField}
+                                    />
+                                </form>
+                                <ClassForm numOfClassForms={this.props.numForms} />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-lg-6">
+                    </div>
                 </div>
-                <classForm />
-            </div>
-            <ClassForm />
             </div>
         );
       }
@@ -60,10 +65,8 @@ function mapStateToProps(state){
 
 function validate(values){
     const errors = {};
-    console.log("validate");
 
-    if (values.numForms > 3 || values.numForms <= 0) {
-        console.log("Enter a valid number please");
+    if (values.numForms > 3 || values.numForms <= 0 || isNaN(values.numForms)) {
         errors.numForms = "Please enter a number between 0 and 3.";
     }
 

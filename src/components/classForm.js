@@ -5,12 +5,11 @@ import DropdownList from 'react-widgets/lib/DropdownList';
 import 'react-widgets/dist/css/react-widgets.css';
 
 class ClassForm extends Component {
-
     onSubmit = (values) => {
         console.log("Submitted! : " + values);
     }
 
-    createForms(numForms){
+    createForms(i){
 
         const timeslot=[
             {text: "8", value: "8"},
@@ -47,16 +46,20 @@ class ClassForm extends Component {
             {text: "W", value:"W"}
         ];
 
+
         return(
-            <div className="leftText field">
-                    <label> Timeslot </label> 
-                    <Field name="timeslot" data={timeslot} component={DropdownList} valueField="value" textField="text" />        
+            <div className="col-lg-3">
+                <div className="classField" key={i}>
+                        <h4> Class {i + 1} </h4>
+                        <label> Timeslot </label> 
+                        <Field name="timeslot" data={timeslot} component={DropdownList} valueField="value" textField="text" />        
 
-                    <label> Distributive </label>
-                    <Field name="distrib" data={distrib} component={DropdownList} valuefield="value" textField="text" />
+                        <label> Distributive </label>
+                        <Field name="distrib" data={distrib} component={DropdownList} valuefield="value" textField="text" />
 
-                    <label> World Culture </label>
-                    <Field name="wc" data={wc} component={DropdownList} valueField="value" textField="text" />
+                        <label> World Culture </label>
+                        <Field name="wc" data={wc} component={DropdownList} valueField="value" textField="text" />
+                </div>
             </div>
         );
     }
@@ -64,14 +67,30 @@ class ClassForm extends Component {
     render() {
 
         const { handleSubmit } = this.props;
+        const classForms = [];
+        for(var i = 0; i < this.props.numOfClassForms; i++){
+            classForms.push(this.createForms(i));
+        }  
 
-        return(
-        <div className="row">
-            <form onSubmit={handleSubmit(this.onSubmit)}> 
-                {this.createForms()}
-            </form>
-        </div>
-        );
+        
+        if(isNaN(this.props.numOfClassForms)){
+            return(
+            null  
+            );
+        } 
+        else{
+            return(
+
+            <div>
+                <form onSubmit={handleSubmit(this.onSubmit)}> 
+                {classForms}
+                <div className="row" id="submitRow">
+                <button type="submit" className="btn btn-primary"> Show Classes </button>
+                </div>
+                </form>
+            </div>
+            );
+        }
     }
 }
 

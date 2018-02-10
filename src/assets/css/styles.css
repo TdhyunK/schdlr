@@ -2,6 +2,11 @@
     color: #2b7cff;
 }
 
+#submitRow {
+    clear: both;
+    padding-top: 2%;
+}
+
 #numForms{
     max-width: 100px;
     margin-right:2%;
@@ -12,15 +17,13 @@
 }
 
 .leftText {
-    padding: 10%;
+    padding-top: 10%;
+    padding-right: 10%;
+    padding-left: 10%;
 }
 
-.leftText.field {
+.classField {
     max-width: 200px;
-}
-
-.leftText.field Field{
-    margin:10%;
 }
 
 .fullScreen {
@@ -31,6 +34,18 @@
 
 .row {
     margin-left: 0%;
+}
+
+.container-fluid{
+    padding-left: 0%;
+}
+
+.col-lg-6, .col-lg-3{
+    padding-left: 0%;
+}
+
+.col-lg-3{
+    float: left;
 }
 
 label {
