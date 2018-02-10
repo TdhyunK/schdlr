@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { submitNumForms } from "../actions/index"; 
-import classForm from "./classForm";
+import ClassForm from "./classForm";
 
 class App extends Component {
 
@@ -31,6 +31,7 @@ class App extends Component {
         const { handleSubmit } = this.props;
 
         return (
+            <div>
             <div className="fullScreen"> 
                 <div className="leftText">
                         <h1 id="schdlr" > SCHDLR </h1>
@@ -44,6 +45,8 @@ class App extends Component {
                         </form>
                 </div>
                 <classForm />
+            </div>
+            <ClassForm />
             </div>
         );
       }

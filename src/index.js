@@ -17,8 +17,7 @@ ReactDOM.render(
     <BrowserRouter>
       <div>
         <Switch>
-          <Route path="/" component={classForm} />
-          <Route path="/createForm" component={classForm} />
+          <Route path="/" component={App} />
         </Switch>
       </div>
     </BrowserRouter>

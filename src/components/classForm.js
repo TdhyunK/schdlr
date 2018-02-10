@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import DropdownList from 'react-widgets/lib/DropdownList';
 import 'react-widgets/dist/css/react-widgets.css';
 
-class classForm extends Component {
+class ClassForm extends Component {
 
     onSubmit = (values) => {
         console.log("Submitted! : " + values);
@@ -75,4 +75,4 @@ class classForm extends Component {
     }
 }
 
-export default reduxForm({form: "classForms"})(classForm);
+export default reduxForm({form: "classForms"})(ClassForm);
