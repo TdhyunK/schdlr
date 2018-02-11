@@ -17,8 +17,14 @@ class ClassForm extends Component {
     )
 
     onSubmit = (values) => {
-        console.dir("Submitted! : " + JSON.stringify(values));
-    }
+        const numKeys = Object.keys(values).length;
+        if(numKeys < 3 * this.props.numOfClassForms) {
+            document.getElementById("warningText").style.display="inherit";
+        }
+        else{
+            document.getElementById("warningText").style.display="none";
+        }
+    }   
 
     createForms(i){
 
@@ -59,8 +65,8 @@ class ClassForm extends Component {
 
 
         return(
-            <div className="col-lg-3">
-                <div className="classField" key={i}>
+            <div className="col-lg-3" key={i}>
+                <div className="classField" >
                         <h4> Class {i + 1} </h4>
                         <label> Timeslot </label> 
                         <Field name={"timeslot-" + i} data={timeslot} component={this.renderDropdownList} valueField="value" textField="text" /> 
@@ -74,6 +80,7 @@ class ClassForm extends Component {
             </div>
         );
     }
+
 
     render() {
 
@@ -96,7 +103,12 @@ class ClassForm extends Component {
                 <form onSubmit={handleSubmit(this.onSubmit)}> 
                 {classForms}
                 <div className="row" id="submitRow">
-                <button type="submit" className="btn btn-primary"> Show Classes </button>
+                    <div className="col-lg-3">
+                        <button type="submit" className="btn btn-primary"> Show Classes </button>
+                    </div>
+                    <div className="col-lg-9">
+                        <p id="warningText" className="has-danger"> Please enter a value for every field. </p>
+                    </div>
                 </div>
                 </form>
             </div>
@@ -105,4 +117,6 @@ class ClassForm extends Component {
     }
 }
 
-export default reduxForm({form: "classForms"})(ClassForm);
+export default reduxForm({
+    form: "classForms"
+})(ClassForm);

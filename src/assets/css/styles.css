@@ -7,6 +7,10 @@
     padding-top: 2%;
 }
 
+#warningText {
+    display: none;
+}
+
 #numForms{
     max-width: 100px;
     margin-right:2%;
