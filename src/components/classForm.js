@@ -5,8 +5,19 @@ import DropdownList from 'react-widgets/lib/DropdownList';
 import 'react-widgets/dist/css/react-widgets.css';
 
 class ClassForm extends Component {
+
+    renderDropdownList = ({ input, data, valueField, textField }) => (
+      <DropdownList
+        {...input}
+        data={data}
+        valueField={valueField}
+        textField={textField}
+        onChange={input.onChange}
+      />
+    )
+
     onSubmit = (values) => {
-        console.log("Submitted! : " + values);
+        console.dir("Submitted! : " + JSON.stringify(values));
     }
 
     createForms(i){
@@ -52,13 +63,13 @@ class ClassForm extends Component {
                 <div className="classField" key={i}>
                         <h4> Class {i + 1} </h4>
                         <label> Timeslot </label> 
-                        <Field name="timeslot" data={timeslot} component={DropdownList} valueField="value" textField="text" />        
+                        <Field name={"timeslot-" + i} data={timeslot} component={this.renderDropdownList} valueField="value" textField="text" /> 
 
                         <label> Distributive </label>
-                        <Field name="distrib" data={distrib} component={DropdownList} valuefield="value" textField="text" />
+                        <Field name={"distrib-" + i} data={distrib} component={this.renderDropdownList} valueField="value" textField="text" />
 
                         <label> World Culture </label>
-                        <Field name="wc" data={wc} component={DropdownList} valueField="value" textField="text" />
+                        <Field name={"wc-" + i} data={wc} component={this.renderDropdownList} valueField="value" textField="text" />
                 </div>
             </div>
         );
