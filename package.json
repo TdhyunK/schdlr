@@ -1,5 +1,5 @@
 {
-  "name": "redux-starter-v2",
+  "name": "SCHDLR",
   "version": "0.0.1",
   "private": true,
   "devDependencies": {
@@ -80,7 +80,7 @@
     "redux-thunk": "^2.1.0"
   },
   "scripts": {
-    "start": "node scripts/start.js",
+    "start": "node server.js",
     "build": "node scripts/build.js",
     "test": "jest --watch --env=jsdom",
     "test:once": "jest --env=jsdom",
