@@ -65,6 +65,7 @@
     "axios": "^0.17.1",
     "bluebird": "^3.5.1",
     "bootstrap": "^4.0.0",
+    "express": "^4.16.2",
     "pg-promise": "^7.4.1",
     "react": "^15.3.1",
     "react-addons-css-transition-group": "^15.3.2",
