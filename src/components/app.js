@@ -3,6 +3,7 @@ import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { submitNumForms } from "../actions/index"; 
 import ClassForm from "./classForm";
+import ClassList from "../containers/classList";
 
 class App extends Component {
 
@@ -38,18 +39,19 @@ class App extends Component {
                             <div className="leftText">
                                 <h1 id="schdlr" > SCHDLR </h1>
                                 <h4> Let us help you pick your next class schedule </h4>
-                                <form onSubmit={handleSubmit(this.onSubmit)} >
-                                    <Field 
+            {/* <form onSubmit={handleSubmit(this.onSubmit)} >
+                                     <Field 
                                         label="Do you need help picking 1, 2, or 3 additional classes?"
                                         name="numForms"
                                         component={this.renderField}
-                                    />
-                                </form>
-                                <ClassForm numOfClassForms={this.props.numForms} />
+                                    /> 
+                                </form> */ }
+                                <ClassForm numOfClassForms={1} /> 
                             </div>
                         </div>
                     </div>
                     <div className="col-lg-6">
+                        <ClassList classes={this.props.classForms} />
                     </div>
                 </div>
             </div>
@@ -59,7 +61,10 @@ class App extends Component {
 
 
 function mapStateToProps(state){
-    return { numForms: state.numForms }; 
+    return { 
+        numForms: state.numForms,
+        classForms: state.classForms    
+    }; 
 
 }
 

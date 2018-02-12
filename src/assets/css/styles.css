@@ -57,3 +57,8 @@ label {
     margin-top: 0.5rem;
 }
 
+.list-group{
+    overflow: scroll;
+    margin-top: 20%;
+    max-height: 50vh;
+}
