@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const NUM_FORMS = "NUM_FORMS"; 
 export const GET_POSTS = "NUM_FORMS";
-const ROOT_URL = "http://localhost:8080/api";
+const ROOT_URL = "http://schdlr.herokuapp.com/api";
 
 export function submitNumForms( numOfForms ){
     return{
