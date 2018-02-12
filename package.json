@@ -81,7 +81,7 @@
     "redux-thunk": "^2.1.0"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "npm install && node server.js",
     "heroku-postbuild": "node scripts/build.js",
     "build": "node scripts/build.js",
     "test": "jest --watch --env=jsdom",
