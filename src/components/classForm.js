@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
-import DropdownList from 'react-widgets/lib/DropdownList';
-import 'react-widgets/dist/css/react-widgets.css';
+import DropdownList from "react-widgets/lib/DropdownList";
+import "react-widgets/dist/css/react-widgets.css";
+import { getClasses } from "../actions/index";
 
 class ClassForm extends Component {
 
@@ -23,6 +24,7 @@ class ClassForm extends Component {
         }
         else{
             document.getElementById("warningText").style.display="none";
+            this.props.getClasses(values);
         }
     }   
 
@@ -54,13 +56,15 @@ class ClassForm extends Component {
             {text: "SCI", value: "SCI"},
             {text: "SLA", value: "SLA"},
             {text: "TAS", value: "TAS"},
-            {text: "TLA", value: "TLA"}
+            {text: "TLA", value: "TLA"},
+            {text: "Don't care", value: null}
         ];
 
         const wc=[
             {text: "CI", value: "CI"},
             {text: "NW", value:"NW"},
-            {text: "W", value:"W"}
+            {text: "W", value:"W"},
+            {text: "Don't care", value: null}
         ];
 
 
@@ -119,4 +123,4 @@ class ClassForm extends Component {
 
 export default reduxForm({
     form: "classForms"
-})(ClassForm);
+})(connect(null, { getClasses })(ClassForm));

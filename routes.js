@@ -2,6 +2,6 @@ const express = require('express');
 const router = express.Router();
 const db = require('./queries');
 
-router.get('/testclasses', db.getFiveClasses);
+router.post('/getForms', db.getClasses);
 
 module.exports = router;
