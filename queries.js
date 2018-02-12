@@ -14,9 +14,13 @@ getClasses = (req, res) => {
     const returnedClassList = [];
     
     for(var key in params){
-       classCharacteristics.push(params[key]["value"]); 
+        if (params[key]["value"] != null) {
+            classCharacteristics.push("%" + params[key]["value"] + "%"); 
+        }
+        else{
+            classCharacteristics.push(params[key]["value"]); 
+        }
     }
-
     if(classCharacteristics.length > 3){
         let tmp = classCharacteristics[3];
         classCharacteristics[3] = classCharacteristics[5];
@@ -27,17 +31,54 @@ getClasses = (req, res) => {
 
     for(var i = 0; i < classCharacteristics.length; i += 3){
 
-        let distIsOrEqual = classCharacteristics[i+1] == null ? "is" : "=";
-        let wcIsOrEqual = classCharacteristics[i + 2] == null ? "is" : "="; 
+        let wcVal = classCharacteristics[i+2];
+        let distVal = classCharacteristics[i+1];
         let classCharacteristicArray = [classCharacteristics[i], classCharacteristics[i+1], classCharacteristics[i+2]]
 
-        db.any(`select * from courses_18s where period = $1 and wc ${wcIsOrEqual}$3 and dist ${distIsOrEqual} $2`, classCharacteristicArray)
-        .then(function(data){
-            returnedClassList.push(data);
-        } ); 
-        
-    }
+        if(wcVal != null && distVal != null){
+            db.any(`select * from courses_18s where period LIKE $1 and wc LIKE $3 and dist LIKE $2`, classCharacteristicArray)
+            .then(function(data){
+                res.status(200).json({
+                    status: 'success',
+                    data: data 
+                });
+            })
+            .catch((err) => err);
+        }
 
+        else if(wcVal == null && distVal != null){
+            db.any(`select * from courses_18s where period LIKE $1 and dist LIKE $2`, classCharacteristicArray)
+            .then(function(data){
+                res.status(200).json({
+                    status: 'success',
+                    data: data 
+                });
+            })
+            .catch((err) => err);
+        }
+        else if(wcVal != null && distVal == null){
+            db.any(`select * from courses_18s where period LIKE $1 and wc LIKE $3`, classCharacteristicArray)
+            .then(function(data){
+                res.status(200).json({
+                    status: 'success',
+                    data: data 
+                });
+            })
+            .catch((err) => err);
+        
+        }
+
+        else if(wcVal == null && distVal == null){
+            db.any(`select * from courses_18s where period LIKE $1`, classCharacteristicArray)
+            .then(function(data){
+                res.status(200).json({
+                    status: 'success',
+                    data: data 
+                });
+            })
+            .catch((err) => err);
+        }
+    }
 }
 
 module.exports = {
