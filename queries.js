@@ -5,7 +5,7 @@ const options = {
 };
 
 const pgp = require('pg-promise')(options);
-const connectingString = 'postgres://djlkxokvmzgxhs:4ccedc5accec73afb2a354977c8f80305f5f8b6ab1a5991ec6efc968f6e47add@ec2-23-21-162-90.compute-1.amazonaws.com:5432/d5p027vcbtirlc';
+const connectingString = process.env.DATABASE_URL; 
 const db = pgp(connectingString);
 
 getClasses = (req, res) => {
