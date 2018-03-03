@@ -1,8 +1,15 @@
 import React from "react";
 import { Component } from "react";
 
+/*
+ * Class list component 
+ * Lists out the valid classes of a classForm query
+ */
 export default class ClassList extends Component {
 
+    /*
+     * Helper function to render list items.
+     */
     createListItem(classItem){
         return(
         <li key={classItem["name"]} className="list-group-item">
@@ -12,6 +19,9 @@ export default class ClassList extends Component {
         );
     }
     
+    /*
+     * Helper function to render the class list.
+     */
     renderList(){
         
         const classList = [];

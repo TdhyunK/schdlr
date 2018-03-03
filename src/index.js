@@ -8,7 +8,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './assets/css/styles.css';
 import reducers from "./reducers";
 import App from "./components/app";
-import classForm from "./components/classForm";
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 

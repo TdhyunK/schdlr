@@ -5,8 +5,14 @@ import { submitNumForms } from "../actions/index";
 import ClassForm from "./classForm";
 import ClassList from "../containers/classList";
 
+/*
+ * Main app component on the home page.
+ */
 class App extends Component {
 
+    /*
+     * Component used to render the redux form Field
+     */
     renderField(field){
         const { meta: { touched, error } } = field;
         const className = `form-group ${touched && error ? "has-danger" : "" }`;
@@ -24,6 +30,9 @@ class App extends Component {
         );
     }
 
+    /*
+     * Function submit the form values
+     */
     onSubmit = (values) => {
         this.props.submitNumForms(values.numForms);
     }
@@ -68,6 +77,10 @@ function mapStateToProps(state){
 
 }
 
+/*
+ * Check if someone is querying for one, two, or three classes 
+ * Not used right now.
+ * */
 function validate(values){
     const errors = {};
 

@@ -5,6 +5,10 @@ import DropdownList from "react-widgets/lib/DropdownList";
 import "react-widgets/dist/css/react-widgets.css";
 import { getClasses } from "../actions/index";
 
+/*
+ * Class form component.
+ * Redux forms to look up class by distributive, world culture, timeslot.
+ */
 class ClassForm extends Component {
 
     renderDropdownList = ({ input, data, valueField, textField }) => (
