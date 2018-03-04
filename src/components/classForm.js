@@ -101,9 +101,10 @@ class ClassForm extends Component {
         
         if(isNaN(this.props.numOfClassForms)){
             return(
-            null  
+                null  
             );
         } 
+
         else{
             return(
 

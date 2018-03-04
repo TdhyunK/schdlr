@@ -5,11 +5,13 @@ const options = {
 };
 
 const pgp = require('pg-promise')(options);
-const connectingString = process.env.DATABASE_URL; 
+//const connectingString = process.env.DATABASE_URL; 
+const connectingString = "postgres://localhost:5432/";
 const db = pgp(connectingString);
 
 getClasses = (req, res) => {
     const params = req.body;
+    console.log(params);
     const classCharacteristics = [];
     const returnedClassList = [];
     
