@@ -11,7 +11,6 @@ const db = pgp(connectingString);
 
 getClasses = (req, res) => {
     const params = req.body;
-    console.log(params);
     const classCharacteristics = [];
     const returnedClassList = [];
     
@@ -19,14 +18,13 @@ getClasses = (req, res) => {
      *  Edit the keys to make them vaid inputs for  SQL 'LIKE' query
      */
     for(var key in params){
-        if (params[key]["value"] != null) {
-            classCharacteristics.push("%" + params[key]["value"] + "%"); 
+        if (params[key] != "") {
+            classCharacteristics.push("%" + params[key] + "%"); 
         }
         else{
-            classCharacteristics.push(params[key]["value"]); 
+            classCharacteristics.push(null); 
         }
     }
-
 
     for(var i = 0; i < classCharacteristics.length; i += 3){
 

@@ -7,19 +7,21 @@ import promise from "redux-promise";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './assets/css/styles.css';
 import reducers from "./reducers";
-import App from "./components/app";
+import App from "./components/App";
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
 ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
+<Provider store={createStoreWithMiddleware(reducers)}>
     <BrowserRouter>
-      <div>
-        <Switch>
-          <Route path="/" component={App} />
-        </Switch>
-      </div>
+        <div>
+            <Switch>
+                <Route path="/" render={() => <App classes={false} />} /> 
+
+                <Route path="/classes" render={() => <App classes={true} />} />
+            </Switch>
+        </div>
     </BrowserRouter>
-  </Provider> ,
-  document.querySelector("#root")
+</Provider> ,
+document.querySelector("#root")
 );

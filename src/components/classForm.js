@@ -75,7 +75,6 @@ class ClassForm extends Component {
         return(
             <div className="col-lg-3" key={i}>
                 <div className="classField" >
-            { /* <h4> Class {i + 1} </h4> */ }
                         <label> Timeslot </label> 
                         <Field name={"timeslot-" + i} data={timeslot} component={this.renderDropdownList} valueField="value" textField="text" /> 
 

@@ -11,9 +11,10 @@ export default class ClassList extends Component {
      * Helper function to render list items.
      */
     createListItem(classItem){
+        console.log(classItem);
         return(
-        <li key={classItem["name"]} className="list-group-item">
-            {classItem.subj} {classItem.num} {classItem.dist} {classItem.period} {classItem.wc}
+            <li key={classItem["subj"] + classItem["num"] + classItem["title"]} className="list-group-item">
+                {classItem.subj} {classItem.num} {classItem.dist} {classItem.period} {classItem.wc}
             </li>
 
         );
@@ -42,6 +43,9 @@ export default class ClassList extends Component {
                 </ul>
             );
         }
-        return(null);
+
+        return(
+            <h3> No classes were found with these requirements. Please search again! </h3>
+        );
     }
 }

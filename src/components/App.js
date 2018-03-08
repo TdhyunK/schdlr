@@ -41,33 +41,23 @@ class App extends Component {
         const { handleSubmit } = this.props;
 
         return (
-            <div className="container-fluid">
                 <div className="row">
                     <div className="col-lg-6">
                         <div className="fullScreen"> 
                             <div className="leftText">
                                 <h1 id="schdlr" > SCHDLR </h1>
                                 <h4> Let us help you pick your next class schedule </h4>
-            {/* <form onSubmit={handleSubmit(this.onSubmit)} >
-                                     <Field 
-                                        label="Do you need help picking 1, 2, or 3 additional classes?"
-                                        name="numForms"
-                                        component={this.renderField}
-                                    /> 
-                                </form> */ }
                                 <ClassForm numOfClassForms={1} /> 
                             </div>
                         </div>
                     </div>
                     <div className="col-lg-6">
-                        <ClassList classes={this.props.classForms} />
+        { this.props.classes ? <ClassList classes={this.props.classForms} /> : <div> </div> }
                     </div>
                 </div>
-            </div>
         );
       }
 }
-
 
 function mapStateToProps(state){
     return { 
