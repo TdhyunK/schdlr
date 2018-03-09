@@ -5,7 +5,6 @@ import classForms from "./classForms";
 
 const rootReducer = combineReducers({
     form: formReducer,
-    numForms: numForms,
     classForms: classForms
 });
 

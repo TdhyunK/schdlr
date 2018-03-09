@@ -11,28 +11,28 @@ import { getClasses } from "../actions/index";
  */
 class ClassForm extends Component {
 
-    renderDropdownList = ({ input, data, valueField, textField }) => (
-      <DropdownList
-        {...input}
-        data={data}
-        valueField={valueField}
-        textField={textField}
-        onChange={input.onChange}
-      />
+    /*
+     * Helper function render redux form Field
+     */
+    renderDropdownList = ({ input, data, valueField, textField, meta: { touched, error } }) => (
+        <div className= { error ? "has-danger" : ""} >
+          <DropdownList
+            {...input}
+            data={data}
+            valueField={valueField}
+            textField={textField}
+            onChange={input.onChange}
+          />
+          { touched ? error : "" }
+        </div>
+
     )
 
     onSubmit = (values) => {
-        const numKeys = Object.keys(values).length;
-        if(numKeys < 3 * this.props.numOfClassForms) {
-            document.getElementById("warningText").style.display="inherit";
-        }
-        else{
-            document.getElementById("warningText").style.display="none";
-            this.props.getClasses(values);
-        }
+        this.props.getClasses(values);
     }   
 
-    createForms(i){
+    createForms(){
 
         const timeslot=[
             {text: "8", value: "8"},
@@ -73,16 +73,16 @@ class ClassForm extends Component {
 
 
         return(
-            <div className="col-lg-3" key={i}>
+            <div className="col-lg-3">
                 <div className="classField" >
                         <label> Timeslot </label> 
-                        <Field name={"timeslot-" + i} data={timeslot} component={this.renderDropdownList} valueField="value" textField="text" /> 
+                        <Field name="timeslot" data={timeslot} component={this.renderDropdownList} valueField="value" textField="text" /> 
 
                         <label> Distributive </label>
-                        <Field name={"distrib-" + i} data={distrib} component={this.renderDropdownList} valueField="value" textField="text" />
+                        <Field name="distrib" data={distrib} component={this.renderDropdownList} valueField="value" textField="text" />
 
                         <label> World Culture </label>
-                        <Field name={"wc-" + i} data={wc} component={this.renderDropdownList} valueField="value" textField="text" />
+                        <Field name="wc" data={wc} component={this.renderDropdownList} valueField="value" textField="text" />
                 </div>
             </div>
         );
@@ -92,39 +92,41 @@ class ClassForm extends Component {
     render() {
 
         const { handleSubmit } = this.props;
-        const classForms = [];
-        for(var i = 0; i < this.props.numOfClassForms; i++){
-            classForms.push(this.createForms(i));
-        }  
 
-        
-        if(isNaN(this.props.numOfClassForms)){
-            return(
-                null  
-            );
-        } 
-
-        else{
-            return(
+        return(
 
             <div>
                 <form onSubmit={handleSubmit(this.onSubmit)}> 
-                {classForms}
-                <div className="row" id="submitRow">
-                    <div className="col-lg-3">
-                        <button type="submit" className="btn btn-primary"> Show Classes </button>
+                    {this.createForms()}
+                    <div className="row" id="submitRow">
+                        <div className="col-lg-3">
+                            <button type="submit" className="btn btn-primary"> Show Classes </button>
+                        </div>
                     </div>
-                    <div className="col-lg-9">
-                        <p id="warningText" className="has-danger"> Please enter a value for every field. </p>
-                    </div>
-                </div>
                 </form>
             </div>
-            );
-        }
+        );
     }
 }
 
+function validate(values){
+    const errors = {};
+    if (!values.timeslot) {
+        errors.timeslot = "Required";
+    }
+    
+    if (!values.distrib) {
+        errors.distrib = "Required";
+    }
+
+    if (!values.wc) {
+        errors.wc = "Required";
+    }
+
+    return errors;
+}
+
 export default reduxForm({
-    form: "classForms"
+    form: "classForms",
+    validate
 })(connect(null, { getClasses })(ClassForm));
