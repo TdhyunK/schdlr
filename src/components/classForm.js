@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from 'react-router';
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import DropdownList from "react-widgets/lib/DropdownList";
@@ -30,6 +31,9 @@ class ClassForm extends Component {
 
     onSubmit = (values) => {
         this.props.getClasses(values);
+        return(
+        <Redirect to="/classes" />
+        );
     }   
 
     createForms(){
@@ -109,7 +113,11 @@ class ClassForm extends Component {
     }
 }
 
-function validate(values){
+//const onSubmitSucces = (values) => {
+    
+// } 
+
+const validate = (values) => {
     const errors = {};
     if (!values.timeslot) {
         errors.timeslot = "Required";
@@ -128,5 +136,6 @@ function validate(values){
 
 export default reduxForm({
     form: "classForms",
+//    onSubmitSucces,
     validate
 })(connect(null, { getClasses })(ClassForm));

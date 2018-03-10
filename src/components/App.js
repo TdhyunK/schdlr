@@ -10,7 +10,7 @@ import ClassList from "../containers/classList";
 class App extends Component {
 
     render() {
-        const { handleSubmit } = this.props;
+        console.log(this.props);
 
         return (
                 <div className="row">
@@ -24,7 +24,7 @@ class App extends Component {
                         </div>
                     </div>
                     <div className="col-lg-6">
-        { this.props.classes ? <ClassList classes={this.props.classForms} /> : <div> </div> }
+                        { this.props.classes ? <ClassList classes={this.props.classForms} /> : <div> </div> }
                     </div>
                 </div>
         );
