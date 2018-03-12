@@ -9,10 +9,10 @@ const ROOT_URL = "http://localhost:8080/api";
 /**
  * Action to create a post request to fetch valid classes
  */
-export function getClasses( values ){
-    const timeslot =  values['timeslot']['value'];
-    const distrib = values['distrib']['value'];
-    const wc = values['wc']['value'];
+export function getClasses(timeslot, distrib, wc){
+    console.log(typeof timeslot);
+    console.log(typeof distrib);
+    console.log(typeof wc);
     const request = axios
         .post(`${ROOT_URL}/getForms/`, querystring.stringify({timeslot: timeslot, distrib: distrib, wc: wc}));
     return {

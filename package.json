@@ -73,6 +73,7 @@
     "gzip-size": "3.0.0",
     "npm": "^5.7.1",
     "pg-promise": "^7.4.1",
+    "query-string": "^5.1.0",
     "querystring": "^0.2.0",
     "react": "^15.3.1",
     "react-addons-css-transition-group": "^15.3.2",

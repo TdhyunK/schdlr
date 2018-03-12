@@ -1,16 +1,48 @@
 import React, { Component } from "react";
-import { Field, reduxForm } from "redux-form";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import ClassForm from "./classForm";
 import ClassList from "../containers/classList";
+import { getClasses } from "../actions/index";
+
 
 /*
  * Main app component on the home page.
  */
 class App extends Component {
 
+
+//    constructor(props) {
+//        super(props);
+//        console.log(this.props);
+//        if (this.props["location"]["pathname"] == "\/classes") {
+//            this.props.getClasses();
+//        }
+//    }
+//
+//    componentWillReceiveProps(nextProps, nextState) {
+//        if (nextProps.src != this.props.src){
+//            const qs = require("query-string");
+//            const timeslot = qs.parse(nextProps["location"]["search"])["timeslot"];
+//            const distrib = qs.parse(nextProps["location"]["search"])["distrib"];
+//            const wc = qs.parse(nextProps["location"]["search"])["wc"];
+//
+//            console.log("tee");
+//            this.props.getClasses(timeslot, distrib, wc);
+//        }
+//    }
+//
     render() {
-        console.log(this.props);
+
+        if (this.props["location"]["pathname"] == "\/classes") {
+            const qs = require("query-string");
+            const timeslot = qs.parse(this.props["location"]["search"])["timeslot"];
+            const distrib = qs.parse(this.props["location"]["search"])["distrib"];
+            const wc = qs.parse(this.props["location"]["search"])["wc"];
+
+            console.log("tee");
+            this.props.getClasses(timeslot, distrib, wc);
+        }
 
         return (
                 <div className="row">
@@ -39,6 +71,4 @@ function mapStateToProps(state){
 
 }
 
-export default reduxForm({
-    form: 'numForms'
-})(connect(mapStateToProps, null)(App)); 
+export default withRouter(connect(mapStateToProps, { getClasses })(App)); 

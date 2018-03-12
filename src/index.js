@@ -17,7 +17,7 @@ ReactDOM.render(
         <div>
             <Switch>
                 <Route exact path="/" render={() => <App classes={false} />} /> 
-                <Route path="/classes" render={() => <App classes={true} />} />
+                <Route exact path="/classes" render={() => <App classes={true} />} />
             </Switch>
         </div>
     </BrowserRouter>

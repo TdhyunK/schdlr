@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import { Redirect } from 'react-router';
+import { browserHistory, withRouter } from 'react-router-dom';
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import DropdownList from "react-widgets/lib/DropdownList";
 import "react-widgets/dist/css/react-widgets.css";
-import { getClasses } from "../actions/index";
 
 /*
  * Class form component.
@@ -30,10 +29,16 @@ class ClassForm extends Component {
     )
 
     onSubmit = (values) => {
-        this.props.getClasses(values);
-        return(
-        <Redirect to="/classes" />
-        );
+
+        const timeslot =  values['timeslot']['value'];
+        const distrib = values['distrib']['value'];
+        const wc = values['wc']['value'];
+        const queryString = "?timeslot=" + timeslot + "&distrib=" + distrib + "&wc=" + wc;
+
+        this.props.history.push({
+            pathname: "/classes",
+            search: queryString 
+        });
     }   
 
     createForms(){
@@ -113,10 +118,6 @@ class ClassForm extends Component {
     }
 }
 
-//const onSubmitSucces = (values) => {
-    
-// } 
-
 const validate = (values) => {
     const errors = {};
     if (!values.timeslot) {
@@ -134,8 +135,8 @@ const validate = (values) => {
     return errors;
 }
 
-export default reduxForm({
+export default withRouter(reduxForm({
     form: "classForms",
-//    onSubmitSucces,
     validate
-})(connect(null, { getClasses })(ClassForm));
+})(ClassForm));
+
