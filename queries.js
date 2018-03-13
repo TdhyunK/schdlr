@@ -12,7 +12,6 @@ const db = pgp(connectingString);
 getClasses = (req, res) => {
     const params = req.body;
     const classCharacteristics = [];
-    const returnedClassList = [];
     
     /*
      *  Edit the keys to make them vaid inputs for  SQL 'LIKE' query

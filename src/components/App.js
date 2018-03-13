@@ -11,38 +11,34 @@ import { getClasses } from "../actions/index";
  */
 class App extends Component {
 
-
-//    constructor(props) {
-//        super(props);
-//        console.log(this.props);
-//        if (this.props["location"]["pathname"] == "\/classes") {
-//            this.props.getClasses();
-//        }
-//    }
-//
-//    componentWillReceiveProps(nextProps, nextState) {
-//        if (nextProps.src != this.props.src){
-//            const qs = require("query-string");
-//            const timeslot = qs.parse(nextProps["location"]["search"])["timeslot"];
-//            const distrib = qs.parse(nextProps["location"]["search"])["distrib"];
-//            const wc = qs.parse(nextProps["location"]["search"])["wc"];
-//
-//            console.log("tee");
-//            this.props.getClasses(timeslot, distrib, wc);
-//        }
-//    }
-//
-    render() {
-
-        if (this.props["location"]["pathname"] == "\/classes") {
+    componentWillMount() {
+        if (this.props["location"]["pathname"] == "\/classes"){
             const qs = require("query-string");
             const timeslot = qs.parse(this.props["location"]["search"])["timeslot"];
             const distrib = qs.parse(this.props["location"]["search"])["distrib"];
             const wc = qs.parse(this.props["location"]["search"])["wc"];
-
-            console.log("tee");
             this.props.getClasses(timeslot, distrib, wc);
         }
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        if (nextProps["location"]["search"] != this.props["location"]["search"]) {
+           return true; 
+        }
+        return true;
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+        if (nextProps["location"]["search"] != this.props["location"]["search"]){
+            const qs = require("query-string");
+            const timeslot = qs.parse(nextProps["location"]["search"])["timeslot"];
+            const distrib = qs.parse(nextProps["location"]["search"])["distrib"];
+            const wc = qs.parse(nextProps["location"]["search"])["wc"];
+            this.props.getClasses(timeslot, distrib, wc);
+        }
+    } 
+
+    render() {
 
         return (
                 <div className="row">
