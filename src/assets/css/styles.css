@@ -62,3 +62,7 @@ label {
     margin-top: 20%;
     max-height: 50vh;
 }
+
+.empty-class-list {
+    top: 50%;
+}
