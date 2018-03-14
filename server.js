@@ -11,4 +11,5 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'build')));
 
 app.use("/api", routes);
+app.get('*', (req, res) => res.sendFile(path.resolve('build', 'index.html')));
 app.listen(PORT);
